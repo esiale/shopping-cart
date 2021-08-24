@@ -11,7 +11,11 @@ const App = () => {
   const [currentCart, setCurrentCart] = useState([]);
 
   const addToCart = (product) => {
-    if (currentCart === [] || !currentCart.includes(product)) {
+    console.log(product, currentCart);
+    if (
+      currentCart === [] ||
+      !currentCart.some((item) => item.id === product.id)
+    ) {
       setCurrentCart([
         ...currentCart,
         {
@@ -27,7 +31,7 @@ const App = () => {
       case 'increase':
         setCurrentCart(
           currentCart.map((item) => {
-            if (item !== product) return item;
+            if (item.id !== product.id) return item;
             return { ...item, quantity: item.quantity + 1 };
           })
         );
@@ -35,7 +39,7 @@ const App = () => {
       case 'decrease':
         setCurrentCart(
           currentCart.map((item) => {
-            if (item !== product) return item;
+            if (item.id !== product.id) return item;
             return { ...item, quantity: item.quantity - 1 };
           })
         );
@@ -43,7 +47,7 @@ const App = () => {
       case 'fixed':
         setCurrentCart(
           currentCart.map((item) => {
-            if (item !== product) return item;
+            if (item.id !== product.id) return item;
             return { ...item, quantity: value };
           })
         );
@@ -53,7 +57,7 @@ const App = () => {
   };
 
   const removeFromCart = (product) => {
-    setCurrentCart(currentCart.filter((item) => item !== product));
+    setCurrentCart(currentCart.filter((item) => item.id !== product.id));
   };
 
   return (
