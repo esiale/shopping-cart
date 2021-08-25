@@ -12,6 +12,7 @@ import ukulele2 from './images/ukulele2.jpg';
 import ukulele3 from './images/ukulele3.jpg';
 import ukulele4 from './images/ukulele4.jpg';
 import ukulele5 from './images/ukulele5.jpg';
+import bg from './images/bg.jpg';
 
 const images = {
   acoustic1,
@@ -28,6 +29,7 @@ const images = {
   ukulele3,
   ukulele4,
   ukulele5,
+  bg,
 };
 
 export default images;

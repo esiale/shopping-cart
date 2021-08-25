@@ -14,17 +14,14 @@ const Nav = (props) => {
           <li>Contact</li>
         </Link>
       </ul>
-      <Link to="/cart">
-        <div className="cart">
+      <div className="nav-cart">
+        <Link to="/cart">
           <span className="material-icons-outlined">shopping_cart</span>
-          <p>
-            {props.currentCart.reduce(
-              (total, prev) => total + prev.quantity,
-              0
-            )}
-          </p>
-        </div>
-      </Link>
+        </Link>
+        <p>
+          {props.currentCart.reduce((total, prev) => total + prev.quantity, 0)}
+        </p>
+      </div>
     </nav>
   );
 };
