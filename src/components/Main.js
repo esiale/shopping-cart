@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
 import Header from './Header';
 import Nav from './Nav';
@@ -62,7 +62,7 @@ const Main = () => {
   };
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="wrapper">
         <div className="top">
           <Header />
@@ -89,7 +89,7 @@ const Main = () => {
           />
         </Switch>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
