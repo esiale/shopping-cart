@@ -1,5 +1,5 @@
 const Cart = (props) => {
-  const { currentCart, changeQuantity, removeFromCart } = props;
+  const { currentCart, changeQuantity, removeFromCart, clearCart } = props;
 
   const handleChange = (e, product) => {
     e.preventDefault();
@@ -19,62 +19,73 @@ const Cart = (props) => {
   };
 
   return (
-    <div className="cart">
-      {currentCart.map((product, index) => {
-        return (
-          <div key={`product${index + 1}`}>
-            <img src={product.image} alt="" />
-            <p>{product.name}</p>
-            <div>
-              <span
-                className="material-icons-outlined"
-                onClick={() => changeQuantity('increase', product)}
-              >
-                add
-              </span>
-              <input
-                type="text"
-                value={product.quantity || ''}
-                onChange={(e) => handleChange(e, product)}
-                onKeyPress={(e) => {
-                  if (!/[0-9]/.test(e.key)) {
-                    e.preventDefault();
-                  }
-                }}
-                onBlur={(e) => handleOnBlur(e, product)}
-              />
-              <span
-                className="material-icons-outlined"
-                onClick={(e) => handleDecrease(product)}
-              >
-                remove
-              </span>
+    <div className="cart-wrapper">
+      <div className="cart-content">
+        {currentCart.map((product, index) => {
+          return (
+            <div className="cart-product-wrapper" key={`product${index + 1}`}>
+              <img src={product.image} alt="" />
+              <div className="cart-product-name">
+                <p>{product.name}</p>
+              </div>
+              <div className="cart-product-quantity">
+                <span
+                  className="material-icons-outlined"
+                  onClick={() => changeQuantity('increase', product)}
+                >
+                  add
+                </span>
+                <input
+                  type="text"
+                  value={product.quantity || ''}
+                  onChange={(e) => handleChange(e, product)}
+                  onKeyPress={(e) => {
+                    if (!/[0-9]/.test(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
+                  onBlur={(e) => handleOnBlur(e, product)}
+                />
+                <span
+                  className="material-icons-outlined"
+                  onClick={(e) => handleDecrease(product)}
+                >
+                  remove
+                </span>
+              </div>
+              <div className="cart-product-price">
+                <p>{product.price * product.quantity}$</p>
+              </div>
+              <div className="cart-product-delete">
+                <span
+                  className="material-icons-outlined"
+                  onClick={() => removeFromCart(product)}
+                >
+                  delete
+                </span>
+              </div>
             </div>
-            <p>{product.price * product.quantity}$</p>
-            <span
-              className="material-icons-outlined"
-              onClick={() => removeFromCart(product)}
-            >
-              delete
-            </span>
-          </div>
-        );
-      })}
-      <div className="cart-footer">
-        <p>
-          Total:{' '}
-          {currentCart.reduce(
-            (total, previous) => total + previous.price * previous.quantity,
-            0
-          )}
-          $
-        </p>
-        <button
-          disabled={currentCart.length === 0}
-          onClick={() => alert('Your order has been placed!')}
-        >
-          Purchase
-        </button>
+          );
+        })}
+        <div className="cart-footer">
+          <button
+            disabled={currentCart.length === 0}
+            onClick={() => {
+              alert('Your order has been placed!');
+              clearCart();
+            }}
+          >
+            Purchase
+          </button>
+          <p>
+            Total:{' '}
+            {currentCart.reduce(
+              (total, previous) => total + previous.price * previous.quantity,
+              0
+            )}
+            $
+          </p>
+        </div>
       </div>
     </div>
   );

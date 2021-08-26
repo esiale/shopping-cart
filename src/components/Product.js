@@ -8,12 +8,7 @@ const Product = (props) => {
       </div>
       <div className="product-footer">
         <p>{product.price}$</p>
-        <span
-          className="material-icons-outlined"
-          onClick={() => addToCart(product)}
-        >
-          add_shopping_cart
-        </span>
+        <button onClick={() => addToCart(product)}>Add to Cart</button>
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import Header from './Header';
 import Nav from './Nav';
 import Home from './Home';
 import Shop from './Shop';
-import Contact from './Contact';
 import Cart from './Cart';
 import data from '../data';
 
@@ -12,7 +11,6 @@ const Main = () => {
   const [currentCart, setCurrentCart] = useState([]);
 
   const addToCart = (product) => {
-    console.log(product, currentCart);
     if (
       currentCart === [] ||
       !currentCart.some((item) => item.id === product.id)
@@ -61,9 +59,14 @@ const Main = () => {
     setCurrentCart(currentCart.filter((item) => item.id !== product.id));
   };
 
+  const clearCart = () => {
+    setCurrentCart([]);
+  };
+
   return (
     <HashRouter>
       <div className="wrapper">
+        <div className="top-overlay" />
         <div className="top">
           <Header />
           <Nav currentCart={currentCart} />
@@ -75,7 +78,6 @@ const Main = () => {
             path="/Shop"
             render={() => <Shop data={data} addToCart={addToCart} />}
           />
-          <Route exact path="/Contact" component={Contact} />
           <Route
             exact
             path="/Cart"
@@ -84,6 +86,7 @@ const Main = () => {
                 currentCart={currentCart}
                 changeQuantity={changeQuantity}
                 removeFromCart={removeFromCart}
+                clearCart={clearCart}
               />
             )}
           />

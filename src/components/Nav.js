@@ -10,9 +10,11 @@ const Nav = (props) => {
         <Link to="/shop">
           <li>Shop</li>
         </Link>
-        <Link to="/contact">
-          <li>Contact</li>
-        </Link>
+        <li>
+          <a href="https://github.com/esiale" target="_blank" rel="noreferrer">
+            Contact
+          </a>
+        </li>
       </ul>
       <div className="nav-cart">
         <Link to="/cart">
